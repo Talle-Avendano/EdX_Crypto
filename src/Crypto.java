@@ -11,6 +11,21 @@ public class Crypto {
         System.out.print("\nEnter number of groups: ");
         int groupNum = scan.nextInt();
         System.out.println("\nEncrypted: " + encryptString(text, shift,groupNum));
+        System.out.print("\nWant to decrypt text?[y/n]: ");
+        while(true){
+            String ans = scan.nextLine();
+            if(ans.startsWith("y") || ans.startsWith("Y")){
+                System.out.print("Enter String: ");
+                text = scan.nextLine();
+                System.out.print("\nEnter number of shift: ");
+                shift  = scan.nextInt();
+                System.out.println("Decrypted: " + decryptString(text, (shift *= -1)));
+                break;
+            }else if(ans.startsWith("n") || ans.startsWith("N")){
+                System.out.println("Okay, bye!");
+                break;
+            }
+        }
     }
 
     public static String normalizeText(String text){
@@ -94,6 +109,14 @@ public class Crypto {
         txt = caesarify(txt, shift);
         txt = groupify(txt, groupBy);
 
+        return txt;
+    }
+
+    public static String decryptString(String txt, int shift){
+        //remove x
+        txt = txt.replaceAll("x", "");
+        txt = normalizeText(txt);
+        txt = caesarify(txt, shift);
         return txt;
     }
 }
