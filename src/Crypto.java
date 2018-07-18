@@ -114,9 +114,13 @@ public class Crypto {
 
     public static String decryptString(String txt, int shift){
         //remove x
-        txt = txt.replaceAll("x", "");
+        txt = ungroupify(txt);
         txt = normalizeText(txt);
         txt = caesarify(txt, shift);
         return txt;
+    }
+
+    public static String ungroupify(String txt){
+        return normalizeText(txt.replaceAll("x", ""));
     }
 }
